@@ -7,7 +7,9 @@ import sys
 
 from src.telemetry import (
     TelemetryConfigError,
+    get_export_mode,
     get_tracer,
+    report_export_verification,
     setup_telemetry,
     shutdown_telemetry,
 )
@@ -44,6 +46,10 @@ def main() -> int:
         create_invoke_agent_span()
     finally:
         shutdown_telemetry(provider)
+
+    # Real OTLP result is only meaningful for oneuptime mode during manual runs.
+    if get_export_mode() == "oneuptime":
+        return report_export_verification()
 
     return 0
 
