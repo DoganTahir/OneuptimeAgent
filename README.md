@@ -23,21 +23,27 @@ This repository currently contains **project infrastructure only**. Real agent l
 - Python **3.11+**
 - A virtual environment (recommended)
 
-## Setup
+## Setup (online or offline)
+
+Vendored wheels live in `wheelhouse/` (committed to git). **No PyPI access required.**
 
 ```bash
-# Clone / enter the project
+git clone https://github.com/DoganTahir/OneuptimeAgent.git
 cd OneuptimeAgent
 
-# Create and activate a virtual environment
 python3 -m venv .venv
 source .venv/bin/activate   # Windows: .venv\Scripts\activate
 
-# Install dependencies
-pip install -r requirements.txt
+pip install --no-index --find-links=wheelhouse -r requirements.lock.txt
 
-# Copy environment template and fill in values when ready
 cp .env.example .env
+# edit .env: OTEL_EXPORT_MODE, ONEUPTIME_OTLP_ENDPOINT, ONEUPTIME_INGESTION_TOKEN
+```
+
+Or:
+
+```bash
+./scripts/install_offline.sh
 ```
 
 ## Environment variables

@@ -21,6 +21,7 @@ dist/
 *.egg-info/
 .eggs/
 *.egg
+# wheelhouse/ is committed so offline servers can pip install without PyPI
 
 # Test / coverage
 .pytest_cache/
